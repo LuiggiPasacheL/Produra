@@ -1,12 +1,15 @@
 package com.example.produra.model
 
-import java.math.BigDecimal
-import java.util.Date
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "products")
 data class Product (
-    val id: Int?,
-    val name: String,
-    val description: String?,
-    val targetAmount: Int,
-    val renewalDate: Date,
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name="name") val name: String,
+    @ColumnInfo(name="description") val description: String?,
+    @ColumnInfo(name="minQuantity") val minQuantity: Number,
+    @ColumnInfo(name="maxQuantity") val maxQuantity: Number?,
+    @ColumnInfo(name="unit") val unit: String
 )
