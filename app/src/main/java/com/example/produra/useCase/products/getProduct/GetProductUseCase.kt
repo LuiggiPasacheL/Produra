@@ -4,7 +4,7 @@ import com.example.produra.model.Product
 import com.example.produra.useCase.products.ProductRepository
 
 class GetProductUseCase(
-    private val repository: ProductRepository
+    private val productRepository: ProductRepository
 ) {
-    suspend operator fun invoke(id: Int): Product? = repository.getProductById(id)
+    suspend operator fun invoke(id: Int): Product? = productRepository.getById(id)
 }

@@ -66,6 +66,6 @@ fun AddProductView() {
 
 @Composable
 @Preview
-fun PreviewAddProduct() {
+fun AddProductPreview() {
     AddProductView()
 }
