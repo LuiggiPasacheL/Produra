@@ -2,8 +2,9 @@ package com.example.produra.useCase.products.addProduct
 
 import com.example.produra.model.Product
 import com.example.produra.useCase.products.ProductRepository
+import javax.inject.Inject
 
-class AddProductUseCase(
+class AddProductUseCase @Inject constructor(
     private val productRepository: ProductRepository
 ) {
     @Throws(ProductNameExistsException::class)

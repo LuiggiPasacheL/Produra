@@ -8,14 +8,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.produra.presentation.addProduct.components.DropdownUnits
 
 @Composable
-fun AddProductView() {
+fun AddProductView(viewModel: AddProductViewModel = hiltViewModel()) {
+    var state = viewModel.state
+
     Column(Modifier.fillMaxSize()) {
         var value by remember {
             mutableStateOf("")
@@ -33,14 +38,14 @@ fun AddProductView() {
             "mano"
         )
         TextField(value = value, label = { Text("Nombre") }, onValueChange = {
-            value = it
+            state = state.copy(name = it)
         })
         TextField(value = value, label = { Text("Descripción") }, onValueChange = {
-            value = it
+            state = state.copy(description = it)
         })
         Row(modifier = Modifier.fillMaxWidth()) {
             TextField(value = value, label = { Text("Cantidad") }, onValueChange = {
-                value = it
+                state = state.copy(quantity = it.toInt())
             })
             DropdownUnits(
                 label = "medida",

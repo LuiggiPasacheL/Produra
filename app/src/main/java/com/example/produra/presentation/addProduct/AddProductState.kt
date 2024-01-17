@@ -5,8 +5,8 @@ import com.example.produra.model.Product
 data class AddProductState(
     val name: String = "",
     val description: String = "",
-    val minQuantity: Number = 1,
-    val quantity: Number = 0,
+    val minQuantity: Int = 1,
+    val quantity: Int = 0,
     val units: String = ""
 ) {
     fun toProduct(): Product {
@@ -20,13 +20,15 @@ data class AddProductState(
         )
     }
 
-    fun fromProduct(p: Product): AddProductState {
-        return this.copy(
-            name = p.name,
-            description = p.description,
-            minQuantity = p.minQuantity,
-            quantity = p.quantity,
-            units = p.units
-        )
+    companion object {
+        fun fromProduct(p: Product): AddProductState {
+            return AddProductState(
+                name = p.name,
+                description = p.description,
+                minQuantity = p.minQuantity,
+                quantity = p.quantity,
+                units = p.units
+            )
+        }
     }
 }
