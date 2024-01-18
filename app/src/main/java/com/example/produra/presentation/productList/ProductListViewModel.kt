@@ -17,6 +17,10 @@ class ProductListViewModel @Inject constructor(
     var state by mutableStateOf(ProductListState())
         private set
 
+    init {
+        loadProducts()
+    }
+
     fun loadProducts() {
         viewModelScope.launch {
             val products = listProductsUseCase()

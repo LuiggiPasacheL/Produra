@@ -8,69 +8,59 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.produra.presentation.addProduct.components.DropdownUnits
 
 @Composable
-fun AddProductView(viewModel: AddProductViewModel = hiltViewModel()) {
-    var state = viewModel.state
+fun AddProductView(viewModel: AddProductViewModel = hiltViewModel(), onNavigateToListProducts: () -> Unit) {
+    val state = viewModel.state
 
     Column(Modifier.fillMaxSize()) {
-        var value by remember {
-            mutableStateOf("")
-        }
-        val timeOptions = listOf(
-            "día",
-            "semana",
-            "mes",
-            "año"
-        )
         val quantityOptions = listOf(
-            "kg",
-            "g",
-            "unidad",
-            "mano"
+            "kg", "g", "unidad", "mano"
         )
-        TextField(value = value, label = { Text("Nombre") }, onValueChange = {
-            state = state.copy(name = it)
+        TextField(value = state.name, label = { Text("Nombre") }, onValueChange = { name ->
+            viewModel.onValueChanged(name = name)
         })
-        TextField(value = value, label = { Text("Descripción") }, onValueChange = {
-            state = state.copy(description = it)
-        })
-        Row(modifier = Modifier.fillMaxWidth()) {
-            TextField(value = value, label = { Text("Cantidad") }, onValueChange = {
-                state = state.copy(quantity = it.toInt())
+        TextField(value = state.description,
+            label = { Text("Descripción") },
+            onValueChange = { description ->
+                viewModel.onValueChanged(description = description)
             })
+        Row(modifier = Modifier.fillMaxWidth()) {
+            TextField(value = state.quantity.toString(),
+                label = { Text("Cantidad") },
+                onValueChange = { quantity ->
+                    if (quantity != "") {
+                        viewModel.onValueChanged(quantity = quantity.toInt())
+                    }
+                })
             DropdownUnits(
-                label = "medida",
-                onValueChange = { },
-                elements = quantityOptions
+                label = "medida", onValueChange = { units ->
+                    viewModel.onValueChanged(units = units)
+                }, elements = quantityOptions
             )
         }
         Row(modifier = Modifier.fillMaxWidth()) {
-            TextField(value = value, label = { Text("Tiempo de renovación") }, onValueChange = {
-                value = it
-            })
+            TextField(value = state.minQuantity.toString(),
+                label = { Text("Cantidad minima") },
+                onValueChange = { minQuantity ->
+                    if (minQuantity != "") {
+                        viewModel.onValueChanged(minQuantity = minQuantity.toInt())
+                    }
+                })
             DropdownUnits(
-                label = "tiempo",
-                onValueChange = { },
-                elements = timeOptions
+                label = "medida", onValueChange = { units ->
+                    viewModel.onValueChanged(units = units)
+                }, elements = quantityOptions
             )
         }
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {
+            viewModel.actionForm()
+            onNavigateToListProducts()
+        }) {
             Text(text = "Agregar producto")
         }
     }
-}
-
-@Composable
-@Preview
-fun AddProductPreview() {
-    AddProductView()
 }

@@ -7,7 +7,7 @@ import com.example.produra.model.Product
 
 @Entity(tableName = "products")
 data class ProductEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int?,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "minQuantity") val minQuantity: Int,
@@ -15,10 +15,7 @@ data class ProductEntity(
     @ColumnInfo(name = "units") val units: String
 ) {
     companion object {
-        fun fromProduct(p: Product): ProductEntity? {
-            if (p.id == null) {
-                return null
-            }
+        fun fromProduct(p: Product): ProductEntity {
             return ProductEntity(
                 id = p.id,
                 units = p.units,

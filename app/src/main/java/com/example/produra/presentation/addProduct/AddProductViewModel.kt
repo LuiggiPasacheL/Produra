@@ -23,4 +23,20 @@ class AddProductViewModel @Inject constructor(
             addProductUseCase(product)
         }
     }
+
+    fun onValueChanged(
+        name: String? = null,
+        description: String? = null,
+        minQuantity: Int? = null,
+        quantity: Int? = null,
+        units: String? = null
+    ) {
+        this.state = this.state.copy(
+            name = name ?: state.name,
+            description = description ?: state.description,
+            minQuantity = minQuantity ?: state.minQuantity,
+            quantity = quantity ?: state.quantity,
+            units = units ?: state.units
+        )
+    }
 }

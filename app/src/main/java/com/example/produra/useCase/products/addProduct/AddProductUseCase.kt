@@ -11,6 +11,7 @@ class AddProductUseCase @Inject constructor(
     suspend operator fun invoke(p: Product) {
         val product = productRepository.getByName(p.name)
         if (product != null) throw ProductNameExistsException()
+        println(p)
         return productRepository.save(p)
     }
 }
