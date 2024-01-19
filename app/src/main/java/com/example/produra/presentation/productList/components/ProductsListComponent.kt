@@ -10,10 +10,18 @@ import androidx.compose.ui.unit.dp
 import com.example.produra.model.Product
 
 @Composable
-fun ProductListComponent(products: List<Product>) {
+fun ProductListComponent(
+    products: List<Product>,
+    decreaseProductQuantity: (Product) -> Unit,
+    increaseProductQuantity: (Product) -> Unit
+) {
     LazyColumn {
         items(products) { product ->
-            ProductCard(product = product, modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp))
+            ProductCard(
+                product = product, modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp),
+                decreaseProductQuantity = decreaseProductQuantity,
+                increaseProductQuantity = increaseProductQuantity
+            )
         }
     }
 }
@@ -27,6 +35,6 @@ fun ProductListComponentPreview() {
         Product(3, "Manzana", "Manzana", 1, 10, "unidades")
     )
 
-    ProductListComponent(products = products)
+    ProductListComponent(products = products, decreaseProductQuantity = {}) {}
 }
 

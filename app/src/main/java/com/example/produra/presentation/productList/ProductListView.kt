@@ -18,18 +18,23 @@ import com.example.produra.presentation.productList.components.ProductListCompon
 
 @Composable
 fun ProductListView(
-    productListViewModel: ProductListViewModel = hiltViewModel(),
+    viewModel: ProductListViewModel = hiltViewModel(),
     onNavigateToAddProduct: () -> Unit
 ) {
-    val state = productListViewModel.state
+    val state = viewModel.state
 
-    LaunchedEffect(key1 = Unit) {
-        productListViewModel.loadProducts()
+    LaunchedEffect(key1 = state) {
+        viewModel.loadProducts()
+        viewModel.toggleProductChanged()
     }
 
     Column {
         Text(text = "Hello World", style = MaterialTheme.typography.titleMedium)
-        ProductListComponent(products = state.products)
+        ProductListComponent(
+            products = state.products,
+            decreaseProductQuantity = { viewModel.decreaseProductQuantity(it) },
+            increaseProductQuantity = { viewModel.increaseProductQuantity(it) }
+        )
     }
 
     Button(

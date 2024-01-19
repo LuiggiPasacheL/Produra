@@ -20,7 +20,12 @@ import androidx.compose.ui.unit.dp
 import com.example.produra.model.Product
 
 @Composable
-fun ProductCard(modifier: Modifier = Modifier, product: Product) {
+fun ProductCard(
+    modifier: Modifier = Modifier,
+    product: Product,
+    decreaseProductQuantity: (Product) -> Unit,
+    increaseProductQuantity: (Product) -> Unit
+) {
     val alignment = Alignment.CenterVertically
     Row(
         modifier
@@ -37,9 +42,13 @@ fun ProductCard(modifier: Modifier = Modifier, product: Product) {
             Row(Modifier.padding(15.dp, 15.dp, 15.dp, 15.dp), verticalAlignment = alignment) {
                 val modifierButton = Modifier.width(30.dp)
 
-                DecreaseProductButton(modifier = modifierButton, onClick = { })
+                DecreaseProductButton(modifier = modifierButton, onClick = {
+                    decreaseProductQuantity(product)
+                })
                 Text(text = product.quantity.toString(), Modifier.padding(15.dp))
-                IncreaseProductButton(modifier = modifierButton, onClick = { })
+                IncreaseProductButton(modifier = modifierButton, onClick = {
+                    increaseProductQuantity(product)
+                })
             }
         }
     }
@@ -66,5 +75,8 @@ fun ProductCardPreview() {
         1, "Plátano", "Color amarillo", 1, 12, "mano"
     )
 
-    ProductCard(product = p, modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp))
+    ProductCard(product = p,
+        modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp),
+        decreaseProductQuantity = { },
+        increaseProductQuantity = { })
 }

@@ -15,10 +15,8 @@ class ProductRepositoryImpl @Inject constructor(
             productDao.addProduct(productEntity)
             return
         }
-
-        val productEntity = productDao.getProductById(id = p.id) ?: return
-        val newProductEntity = productEntity.copy(id = p.id)
-        productDao.updateProduct(newProductEntity)
+        val productEntity = ProductEntity.fromProduct(p)
+        productDao.updateProduct(productEntity)
     }
 
     override suspend fun getById(id: Int): Product? {
