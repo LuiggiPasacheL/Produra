@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,11 +22,11 @@ fun ProductListView(
     onNavigateToAddProduct: () -> Unit
 ) {
     val state = productListViewModel.state
-    // TODO: aquí viene una lista de productos, por ejemplo
-    // NOTE: Esto será parecido a la parte de hábitos en TickTick
-    // Producto 1   |   - {Cantidad actual} + | flecha pa abajo
-    // Detalles
-    // Ver más
+
+    LaunchedEffect(key1 = Unit) {
+        productListViewModel.loadProducts()
+    }
+
     Column {
         Text(text = "Hello World", style = MaterialTheme.typography.titleMedium)
         ProductListComponent(products = state.products)
