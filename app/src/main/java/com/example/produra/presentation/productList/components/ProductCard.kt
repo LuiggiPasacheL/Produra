@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,10 +20,7 @@ import com.example.produra.model.Product
 
 @Composable
 fun ProductCard(
-    modifier: Modifier = Modifier,
-    product: Product,
-    decreaseProductQuantity: (Product) -> Unit,
-    increaseProductQuantity: (Product) -> Unit
+    modifier: Modifier = Modifier, product: Product, toggleProductMustBePurchased: (Product) -> Unit
 ) {
     val alignment = Alignment.CenterVertically
     Row(
@@ -40,31 +36,16 @@ fun ProductCard(
         }
         Box {
             Row(Modifier.padding(15.dp, 15.dp, 15.dp, 15.dp), verticalAlignment = alignment) {
-                val modifierButton = Modifier.width(30.dp)
-
-                DecreaseProductButton(modifier = modifierButton, onClick = {
-                    decreaseProductQuantity(product)
-                })
-                Text(text = product.quantity.toString(), Modifier.padding(15.dp))
-                IncreaseProductButton(modifier = modifierButton, onClick = {
-                    increaseProductQuantity(product)
-                })
+                println(product.id.toString() + " " + product.mustBePurchased.toString())
+                Button(onClick = { toggleProductMustBePurchased(product) }) {
+                    if (product.mustBePurchased) {
+                        Text(text = "Necesito comprar este producto")
+                    } else {
+                        Text(text = "Ya compré este producto")
+                    }
+                }
             }
         }
-    }
-}
-
-@Composable
-fun DecreaseProductButton(modifier: Modifier, onClick: () -> Unit) {
-    Button(onClick = onClick, modifier) {
-        Text(text = "-")
-    }
-}
-
-@Composable
-fun IncreaseProductButton(modifier: Modifier, onClick: () -> Unit) {
-    Button(onClick = onClick, modifier) {
-        Text(text = "+")
     }
 }
 
@@ -72,11 +53,10 @@ fun IncreaseProductButton(modifier: Modifier, onClick: () -> Unit) {
 @Composable
 fun ProductCardPreview() {
     val p = Product(
-        1, "Plátano", "Color amarillo", 1, 12, "mano"
+        1, "Plátano", "Color amarillo", true
     )
 
     ProductCard(product = p,
         modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp),
-        decreaseProductQuantity = { },
-        increaseProductQuantity = { })
+        toggleProductMustBePurchased = { })
 }

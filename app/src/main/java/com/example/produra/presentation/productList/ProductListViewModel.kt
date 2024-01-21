@@ -35,19 +35,10 @@ class ProductListViewModel @Inject constructor(
         state = state.copy(productChanged = !state.productChanged)
     }
 
-    fun decreaseProductQuantity(product: Product) {
+    fun toggleProductMustBePurchased(p: Product) {
         viewModelScope.launch {
-            val newProduct = product.copy(quantity = product.quantity - 1)
-            updateProductUseCase(newProduct)
-            toggleProductChanged()
-        }
-    }
-
-    fun increaseProductQuantity(product: Product) {
-        viewModelScope.launch {
-            val newProduct = product.copy(quantity = product.quantity + 1)
-            updateProductUseCase(newProduct)
-            toggleProductChanged()
+            val product = p.copy(mustBePurchased = !p.mustBePurchased)
+            updateProductUseCase(product)
         }
     }
 }

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bc224c200205c1deb5ae4e25790e4ea2",
+    "identityHash": "34b8c6d7c18390bc462dc30d0ae5debf",
     "entities": [
       {
         "tableName": "products",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `minQuantity` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `units` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `mustBePurchased` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -27,21 +27,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "minQuantity",
-            "columnName": "minQuantity",
+            "fieldPath": "mustBePurchased",
+            "columnName": "mustBePurchased",
             "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "quantity",
-            "columnName": "quantity",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "units",
-            "columnName": "units",
-            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -58,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bc224c200205c1deb5ae4e25790e4ea2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '34b8c6d7c18390bc462dc30d0ae5debf')"
     ]
   }
 }

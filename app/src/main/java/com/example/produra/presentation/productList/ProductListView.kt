@@ -32,8 +32,7 @@ fun ProductListView(
         Text(text = "Hello World", style = MaterialTheme.typography.titleMedium)
         ProductListComponent(
             products = state.products,
-            decreaseProductQuantity = { viewModel.decreaseProductQuantity(it) },
-            increaseProductQuantity = { viewModel.increaseProductQuantity(it) }
+            toggleProductMustBePurchased = { product -> viewModel.toggleProductMustBePurchased(product) }
         )
     }
 

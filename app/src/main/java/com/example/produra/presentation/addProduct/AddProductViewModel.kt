@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.produra.model.Product
 import com.example.produra.useCase.products.addProduct.AddProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,24 +20,16 @@ class AddProductViewModel @Inject constructor(
 
     fun actionForm() {
         viewModelScope.launch {
-            val product = state.toProduct()
+            val product = state.product
             addProductUseCase(product)
         }
     }
 
     fun onValueChanged(
-        name: String? = null,
-        description: String? = null,
-        minQuantity: Int? = null,
-        quantity: Int? = null,
-        units: String? = null
+        product: Product
     ) {
         this.state = this.state.copy(
-            name = name ?: state.name,
-            description = description ?: state.description,
-            minQuantity = minQuantity ?: state.minQuantity,
-            quantity = quantity ?: state.quantity,
-            units = units ?: state.units
+            product = product
         )
     }
 }
