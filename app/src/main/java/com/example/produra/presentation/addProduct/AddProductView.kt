@@ -1,11 +1,14 @@
 package com.example.produra.presentation.addProduct
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -26,11 +29,21 @@ fun AddProductView(
                 val product = state.product.copy(description = description)
                 viewModel.onValueChanged(product = product)
             })
-        Button(onClick = {
-            viewModel.actionForm()
-            onNavigateToListProducts()
-        }) {
-            Text(text = "Agregar producto")
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(onClick = {
+                viewModel.actionForm()
+                onNavigateToListProducts()
+            }) {
+                Text(text = "Agregar producto")
+            }
+            Button(onClick = {
+                onNavigateToListProducts()
+            }) {
+                Text(text = "Retroceder")
+            }
         }
     }
 }
