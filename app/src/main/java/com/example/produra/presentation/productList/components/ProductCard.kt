@@ -9,7 +9,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,22 +54,22 @@ fun ProductCard(
                 Row(Modifier.padding(15.dp, 15.dp, 15.dp, 15.dp), verticalAlignment = alignment) {
                     Button(onClick = { toggleProductMustBePurchased(product) }) {
                         if (product.mustBePurchased) {
-                            Text(text = "Necesito comprar este producto")
+                            Icon(imageVector = Icons.Default.Check, contentDescription = "Necesito comprar este producto")
                         } else {
-                            Text(text = "Ya compré este producto")
+                            Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "Necesito comprar este producto")
                         }
                     }
                 }
             }
         }
         if (showDetails) {
-            Details(product = product)
+            ProductDetails(product = product)
         }
     }
 }
 
 @Composable
-fun Details(product: Product) {
+fun ProductDetails(product: Product) {
     Box {
         Text(text = product.description)
     }
