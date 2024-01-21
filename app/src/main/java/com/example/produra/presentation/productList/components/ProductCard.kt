@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -35,10 +36,13 @@ fun ProductCard(
     var showDetails by remember { mutableStateOf(false) }
 
     val alignment = Alignment.CenterVertically
-    Column {
+    Column(
+        modifier
+            .background(Color.White)
+            .fillMaxWidth()
+    ) {
         Row(
-            modifier
-                .background(Color.White)
+            modifier = Modifier
                 .fillMaxWidth()
                 .border(2.dp, MaterialTheme.colorScheme.secondary),
             verticalAlignment = alignment,
@@ -46,17 +50,25 @@ fun ProductCard(
         ) {
             Box(
                 Modifier
-                    .padding(15.dp, 15.dp, 15.dp, 15.dp)
-                    .clickable { showDetails = !showDetails }) {
+                    .clickable { showDetails = !showDetails }
+                    .fillMaxWidth(0.75f)
+                    .padding(10.dp, 15.dp, 100.dp, 15.dp)
+            ) {
                 Text(text = product.name)
             }
             Box {
-                Row(Modifier.padding(15.dp, 15.dp, 15.dp, 15.dp), verticalAlignment = alignment) {
+                Row(Modifier.padding(10.dp, 15.dp, 10.dp, 15.dp), verticalAlignment = alignment) {
                     Button(onClick = { toggleProductMustBePurchased(product) }) {
                         if (product.mustBePurchased) {
-                            Icon(imageVector = Icons.Default.Check, contentDescription = "Necesito comprar este producto")
+                            Icon(
+                                imageVector = Icons.Default.Check,
+                                contentDescription = "Necesito comprar este producto"
+                            )
                         } else {
-                            Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "Necesito comprar este producto")
+                            Icon(
+                                imageVector = Icons.Default.ShoppingCart,
+                                contentDescription = "Necesito comprar este producto"
+                            )
                         }
                     }
                 }
@@ -70,8 +82,14 @@ fun ProductCard(
 
 @Composable
 fun ProductDetails(product: Product) {
-    Box {
-        Text(text = product.description)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+            .background(color = MaterialTheme.colorScheme.secondary)
+            .padding(20.dp)
+    ) {
+        Text(text = product.description, color = Color.White)
     }
 }
 
