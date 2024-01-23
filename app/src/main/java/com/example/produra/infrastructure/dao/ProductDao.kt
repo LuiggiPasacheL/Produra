@@ -10,13 +10,19 @@ import com.example.produra.infrastructure.entities.ProductEntity
 interface ProductDao {
     @Insert
     suspend fun addProduct(p: ProductEntity)
+
     @Update
     suspend fun updateProduct(p: ProductEntity)
+
     @Query("SELECT * FROM products WHERE name = :name")
     suspend fun getProductByName(name: String): ProductEntity?
+
     @Query("SELECT * FROM products")
     suspend fun getProducts(): List<ProductEntity>
 
     @Query("SELECT * FROM products WHERE id = :id")
     suspend fun getProductById(id: Int): ProductEntity?
+
+    @Query("SELECT * FROM products WHERE mustBePurchased=1")
+    suspend fun getMustBePurchasedProducts(): List<ProductEntity>
 }

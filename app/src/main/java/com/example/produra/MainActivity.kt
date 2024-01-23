@@ -12,8 +12,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.produra.presentation.addProduct.AddProductView
+import com.example.produra.presentation.cart.CartView
 import com.example.produra.presentation.productList.ProductListView
 import com.example.produra.ui.theme.ProduraTheme
+import com.example.produra.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,22 +35,33 @@ fun MainApp() {
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "list") {
-                composable("list") {
+            NavHost(
+                navController = navController, startDestination = Constants.ComponentRoutes.LIST
+            ) {
+                composable(Constants.ComponentRoutes.LIST) {
                     ProductListView(onNavigateToAddProduct = {
                         navController.navigate(
-                            "add"
+                            Constants.ComponentRoutes.ADDPRODUCT
+                        )
+                    }, onNavigateToCart = {
+                        navController.navigate(
+                            Constants.ComponentRoutes.CART
                         )
                     })
                 }
-                composable("add") {
-                    AddProductView(
-                        onNavigateToListProducts = {
-                            navController.navigate(
-                                "list"
-                            )
-                        }
-                    )
+                composable(Constants.ComponentRoutes.ADDPRODUCT) {
+                    AddProductView(onNavigateToListProducts = {
+                        navController.navigate(
+                            Constants.ComponentRoutes.LIST
+                        )
+                    })
+                }
+                composable(Constants.ComponentRoutes.CART) {
+                    CartView(onNavigateToListProducts = {
+                        navController.navigate(
+                            Constants.ComponentRoutes.LIST
+                        )
+                    })
                 }
             }
         }

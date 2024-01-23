@@ -31,4 +31,7 @@ class ProductRepositoryImpl @Inject constructor(
         return productDao.getProducts().map { productEntity -> productEntity.toProduct() }
     }
 
+    override suspend fun getCart(): List<Product> {
+        return productDao.getMustBePurchasedProducts().map { productEntity -> productEntity.toProduct() }
+    }
 }
