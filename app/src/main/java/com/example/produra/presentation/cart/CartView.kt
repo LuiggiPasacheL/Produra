@@ -1,4 +1,4 @@
-package com.example.produra.presentation.Cart
+package com.example.produra.presentation.cart
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

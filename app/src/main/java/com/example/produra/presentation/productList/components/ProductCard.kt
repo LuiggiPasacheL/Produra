@@ -3,7 +3,6 @@ package com.example.produra.presentation.productList.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -46,18 +45,9 @@ fun ProductCard(
                 .fillMaxWidth()
                 .border(2.dp, MaterialTheme.colorScheme.secondary),
             verticalAlignment = alignment,
-            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Box(
-                Modifier
-                    .clickable { showDetails = !showDetails }
-                    .fillMaxWidth(0.75f)
-                    .padding(10.dp, 15.dp, 100.dp, 15.dp)
-            ) {
-                Text(text = product.name)
-            }
             Box {
-                Row(Modifier.padding(10.dp, 15.dp, 10.dp, 15.dp), verticalAlignment = alignment) {
+                Row(Modifier.padding(10.dp, 15.dp, 0.dp, 15.dp), verticalAlignment = alignment) {
                     Button(onClick = { toggleProductMustBePurchased(product) }) {
                         if (product.mustBePurchased) {
                             Icon(
@@ -72,6 +62,14 @@ fun ProductCard(
                         }
                     }
                 }
+            }
+            Box(
+                Modifier
+                    .clickable { showDetails = !showDetails }
+                    .fillMaxWidth()
+                    .padding(15.dp, 15.dp, 100.dp, 15.dp)
+            ) {
+                Text(text = product.name)
             }
         }
         if (showDetails) {
