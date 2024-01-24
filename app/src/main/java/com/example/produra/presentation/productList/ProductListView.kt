@@ -26,7 +26,8 @@ import com.example.produra.presentation.productList.components.ProductListCompon
 fun ProductListView(
     viewModel: ProductListViewModel = hiltViewModel(),
     onNavigateToAddProduct: () -> Unit,
-    onNavigateToCart: () -> Unit
+    onNavigateToCart: () -> Unit,
+    onNavigateToProduct: (id: Int) -> Unit
 ) {
     val state = viewModel.state
 
@@ -54,11 +55,15 @@ fun ProductListView(
                 )
             }
         }
-        ProductListComponent(products = state.products, toggleProductMustBePurchased = { product ->
-            viewModel.toggleProductMustBePurchased(
-                product
-            )
-        })
+        ProductListComponent(
+            products = state.products,
+            toggleProductMustBePurchased = { product ->
+                viewModel.toggleProductMustBePurchased(
+                    product
+                )
+            },
+            onNavigateToProduct = onNavigateToProduct
+        )
     }
 
     Button(

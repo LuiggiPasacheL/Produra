@@ -13,12 +13,14 @@ import com.example.produra.model.Product
 fun ProductListComponent(
     products: List<Product>,
     toggleProductMustBePurchased: (Product) -> Unit,
+    onNavigateToProduct: (id: Int) -> Unit,
 ) {
     LazyColumn {
         items(products) { product ->
             ProductCard(
-                product = product, modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp),
+                modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp), product = product,
                 toggleProductMustBePurchased = toggleProductMustBePurchased,
+                onNavigateToProduct = onNavigateToProduct
             )
         }
     }
@@ -33,6 +35,9 @@ fun ProductListComponentPreview() {
         Product(3, "Manzana", "Manzana", true)
     )
 
-    ProductListComponent(products = products, toggleProductMustBePurchased = {})
+    ProductListComponent(
+        products = products,
+        toggleProductMustBePurchased = {},
+        onNavigateToProduct = {})
 }
 

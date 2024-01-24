@@ -1,4 +1,4 @@
-package com.example.produra.presentation.addProduct
+package com.example.produra.presentation.productForm
 
 import com.example.produra.model.Product
 
@@ -8,5 +8,6 @@ data class AddProductState(
         name = "",
         description = "",
         mustBePurchased = false,
-    )
+    ),
+    val editable: Boolean = false,
 )

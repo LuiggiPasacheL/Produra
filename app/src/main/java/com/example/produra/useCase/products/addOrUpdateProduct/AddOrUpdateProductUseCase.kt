@@ -1,13 +1,13 @@
-package com.example.produra.useCase.products.updateProduct
+package com.example.produra.useCase.products.addOrUpdateProduct
 
 import com.example.produra.model.Product
 import com.example.produra.useCase.products.ProductRepository
 import javax.inject.Inject
 
-class UpdateProductUseCase @Inject constructor(
+class AddOrUpdateProductUseCase @Inject constructor(
     private val productRepository: ProductRepository
 ) {
     suspend operator fun invoke(p: Product) {
-        productRepository.save(p)
+        return productRepository.save(p)
     }
 }

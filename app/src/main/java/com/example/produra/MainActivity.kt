@@ -8,11 +8,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.produra.presentation.addProduct.AddProductView
+import androidx.navigation.navArgument
 import com.example.produra.presentation.cart.CartView
+import com.example.produra.presentation.productForm.AddProductView
 import com.example.produra.presentation.productList.ProductListView
 import com.example.produra.ui.theme.ProduraTheme
 import com.example.produra.utils.Constants
@@ -41,27 +43,50 @@ fun MainApp() {
                 composable(Constants.ComponentRoutes.LIST) {
                     ProductListView(onNavigateToAddProduct = {
                         navController.navigate(
-                            Constants.ComponentRoutes.ADDPRODUCT
+                            Constants.ComponentRoutes.PRODUCTFORM
                         )
                     }, onNavigateToCart = {
                         navController.navigate(
                             Constants.ComponentRoutes.CART
                         )
+                    }, onNavigateToProduct = {
+                        navController.navigate(
+                            Constants.ComponentRoutes.PRODUCTFORM.replace(
+                                "{productId}",
+                                it.toString()
+                            )
+                        )
                     })
                 }
-                composable(Constants.ComponentRoutes.ADDPRODUCT) {
+                composable(
+                    Constants.ComponentRoutes.PRODUCTFORM,
+                    arguments = listOf(navArgument("productId") {
+                        type = NavType.IntType
+                        defaultValue = 0
+                    })
+                ) {
                     AddProductView(onNavigateToListProducts = {
                         navController.navigate(
                             Constants.ComponentRoutes.LIST
                         )
-                    })
+                    }, id = null)
                 }
                 composable(Constants.ComponentRoutes.CART) {
-                    CartView(onNavigateToListProducts = {
-                        navController.navigate(
-                            Constants.ComponentRoutes.LIST
-                        )
-                    })
+                    CartView(
+                        onNavigateToListProducts = {
+                            navController.navigate(
+                                Constants.ComponentRoutes.LIST
+                            )
+                        },
+                        onNavigateToProduct = {
+                            navController.navigate(
+                                Constants.ComponentRoutes.PRODUCTFORM.replace(
+                                    "{productId}",
+                                    it.toString()
+                                )
+                            )
+                        }
+                    )
                 }
             }
         }

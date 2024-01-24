@@ -1,4 +1,4 @@
-package com.example.produra.presentation.addProduct
+package com.example.produra.presentation.productForm
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun AddProductView(
-    viewModel: AddProductViewModel = hiltViewModel(), onNavigateToListProducts: () -> Unit
+    viewModel: AddProductViewModel = hiltViewModel(), onNavigateToListProducts: () -> Unit, id: Int?
 ) {
     val state = viewModel.state
 

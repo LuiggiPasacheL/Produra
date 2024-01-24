@@ -1,4 +1,4 @@
-package com.example.produra.presentation.addProduct.components
+package com.example.produra.presentation.productForm.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

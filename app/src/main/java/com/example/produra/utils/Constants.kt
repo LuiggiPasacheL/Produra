@@ -5,8 +5,8 @@ object Constants {
     val APP_NAME = "Produra"
 
     object ComponentRoutes {
-        val LIST = "listProduct"
-        val CART = "cartProduct"
-        val ADDPRODUCT = "addProduct"
+        val LIST = "products"
+        val CART = "cart"
+        val PRODUCTFORM = "product?productId={productId}"
     }
 }

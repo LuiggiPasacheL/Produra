@@ -3,6 +3,7 @@ package com.example.produra.presentation.productList.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,7 +31,10 @@ import com.example.produra.model.Product
 
 @Composable
 fun ProductCard(
-    modifier: Modifier = Modifier, product: Product, toggleProductMustBePurchased: (Product) -> Unit
+    modifier: Modifier = Modifier,
+    product: Product,
+    toggleProductMustBePurchased: (Product) -> Unit,
+    onNavigateToProduct: (id: Int) -> Unit
 ) {
     var showDetails by remember { mutableStateOf(false) }
 
@@ -73,21 +77,25 @@ fun ProductCard(
             }
         }
         if (showDetails) {
-            ProductDetails(product = product)
+            ProductDetails(product = product, onNavigateToProduct = onNavigateToProduct)
         }
     }
 }
 
 @Composable
-fun ProductDetails(product: Product) {
-    Box(
+fun ProductDetails(product: Product, onNavigateToProduct: (id: Int) -> Unit) {
+    Row(
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)
             .background(color = MaterialTheme.colorScheme.secondary)
-            .padding(20.dp)
+            .padding(20.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = product.description, color = Color.White)
+        Button(onClick = { onNavigateToProduct(product.id!!) }) {
+            Text(text = "Ver más")
+        }
     }
 }
 
@@ -98,7 +106,10 @@ fun ProductCardPreview() {
         1, "Plátano", "Color amarillo", true
     )
 
-    ProductCard(product = p,
+    ProductCard(
         modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp),
-        toggleProductMustBePurchased = { })
+        product = p,
+        toggleProductMustBePurchased = { },
+        onNavigateToProduct = { }
+    )
 }

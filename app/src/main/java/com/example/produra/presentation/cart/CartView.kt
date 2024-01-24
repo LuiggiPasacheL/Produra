@@ -17,7 +17,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.produra.presentation.productList.components.ProductListComponent
 
 @Composable
-fun CartView(viewModel: CartViewModel = hiltViewModel(), onNavigateToListProducts: () -> Unit) {
+fun CartView(
+    viewModel: CartViewModel = hiltViewModel(),
+    onNavigateToListProducts: () -> Unit,
+    onNavigateToProduct: (id: Int) -> Unit
+) {
     val state = viewModel.state
 
     LaunchedEffect(key1 = state) {
@@ -41,10 +45,14 @@ fun CartView(viewModel: CartViewModel = hiltViewModel(), onNavigateToListProduct
                 textAlign = TextAlign.Center
             )
         }
-        ProductListComponent(products = state.products, toggleProductMustBePurchased = { product ->
-            viewModel.toggleProductMustBePurchased(
-                product
-            )
-        })
+        ProductListComponent(
+            products = state.products,
+            toggleProductMustBePurchased = { product ->
+                viewModel.toggleProductMustBePurchased(
+                    product
+                )
+            },
+            onNavigateToProduct = onNavigateToProduct
+        )
     }
 }

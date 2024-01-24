@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.produra.model.Product
+import com.example.produra.useCase.products.addOrUpdateProduct.AddOrUpdateProductUseCase
 import com.example.produra.useCase.products.listProducts.ListProductsUseCase
-import com.example.produra.useCase.products.updateProduct.UpdateProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
     val listProductsUseCase: ListProductsUseCase,
-    val updateProductUseCase: UpdateProductUseCase
+    val updateProductUseCase: AddOrUpdateProductUseCase
 ) : ViewModel() {
     var state by mutableStateOf(ProductListState())
         private set
