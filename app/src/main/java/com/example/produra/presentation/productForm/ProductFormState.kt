@@ -2,7 +2,7 @@ package com.example.produra.presentation.productForm
 
 import com.example.produra.model.Product
 
-data class AddProductState(
+data class ProductFormState(
     val product: Product = Product(
         id = null,
         name = "",

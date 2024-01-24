@@ -14,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.produra.presentation.cart.CartView
-import com.example.produra.presentation.productForm.AddProductView
+import com.example.produra.presentation.productForm.ProductFormView
 import com.example.produra.presentation.productList.ProductListView
 import com.example.produra.ui.theme.ProduraTheme
 import com.example.produra.utils.Constants
@@ -64,7 +64,7 @@ fun MainApp() {
                         defaultValue = 0
                     })
                 ) {
-                    AddProductView(onNavigateToListProducts = {
+                    ProductFormView(onNavigateToListProducts = {
                         navController.navigate(
                             Constants.ComponentRoutes.LIST
                         )

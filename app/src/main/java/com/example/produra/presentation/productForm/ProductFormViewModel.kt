@@ -14,12 +14,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddProductViewModel @Inject constructor(
+class ProductFormViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     val addOrUpdateProductUseCase: AddOrUpdateProductUseCase,
     val getProductUseCase: GetProductUseCase
 ) : ViewModel() {
-    var state by mutableStateOf(AddProductState())
+    var state by mutableStateOf(ProductFormState())
         private set
 
     private val productId: Int? = savedStateHandle["productId"]
