@@ -52,8 +52,7 @@ fun MainApp() {
                     }, onNavigateToProduct = {
                         navController.navigate(
                             Constants.ComponentRoutes.PRODUCTFORM.replace(
-                                "{productId}",
-                                it.toString()
+                                "{productId}", it.toString()
                             )
                         )
                     })
@@ -69,24 +68,20 @@ fun MainApp() {
                         navController.navigate(
                             Constants.ComponentRoutes.LIST
                         )
-                    }, id = null)
+                    })
                 }
                 composable(Constants.ComponentRoutes.CART) {
-                    CartView(
-                        onNavigateToListProducts = {
-                            navController.navigate(
-                                Constants.ComponentRoutes.LIST
+                    CartView(onNavigateToListProducts = {
+                        navController.navigate(
+                            Constants.ComponentRoutes.LIST
+                        )
+                    }, onNavigateToProduct = {
+                        navController.navigate(
+                            Constants.ComponentRoutes.PRODUCTFORM.replace(
+                                "{productId}", it.toString()
                             )
-                        },
-                        onNavigateToProduct = {
-                            navController.navigate(
-                                Constants.ComponentRoutes.PRODUCTFORM.replace(
-                                    "{productId}",
-                                    it.toString()
-                                )
-                            )
-                        }
-                    )
+                        )
+                    })
                 }
             }
         }

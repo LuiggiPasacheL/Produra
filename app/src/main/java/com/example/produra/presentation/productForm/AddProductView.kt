@@ -24,7 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun AddProductView(
-    viewModel: AddProductViewModel = hiltViewModel(), onNavigateToListProducts: () -> Unit, id: Int?
+    viewModel: AddProductViewModel = hiltViewModel(), onNavigateToListProducts: () -> Unit
 ) {
     val state = viewModel.state
 
