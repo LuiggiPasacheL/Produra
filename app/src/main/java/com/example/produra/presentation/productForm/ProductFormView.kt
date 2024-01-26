@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,7 +29,7 @@ fun ProductFormView(
     val state = viewModel.state
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -61,11 +61,13 @@ fun ProductFormView(
                         viewModel.onValueChanged(product = product)
                     })
                 Row(
-                    modifier = Modifier.height(48.dp).clickable {
-                        val mustBePurchased = state.product.mustBePurchased
-                        val product = state.product.copy(mustBePurchased = !mustBePurchased)
-                        viewModel.onValueChanged(product = product)
-                    },
+                    modifier = Modifier
+                        .height(48.dp)
+                        .clickable {
+                            val mustBePurchased = state.product.mustBePurchased
+                            val product = state.product.copy(mustBePurchased = !mustBePurchased)
+                            viewModel.onValueChanged(product = product)
+                        },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Checkbox(
