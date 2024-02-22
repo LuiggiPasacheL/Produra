@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "3b52b79c73c6ab84c5edf918dec3c8f2",
+    "version": 2,
+    "identityHash": "e082b24c9c85018c94cda52eb7b6e030",
     "entities": [
       {
         "tableName": "products",
@@ -59,12 +59,38 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "units",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`unitId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `measure` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "unitId",
+            "columnName": "unitId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "measure",
+            "columnName": "measure",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "unitId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3b52b79c73c6ab84c5edf918dec3c8f2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e082b24c9c85018c94cda52eb7b6e030')"
     ]
   }
 }

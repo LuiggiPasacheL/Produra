@@ -3,6 +3,7 @@ package com.example.produra.di
 import android.content.Context
 import androidx.room.Room
 import com.example.produra.infrastructure.dao.ProductDao
+import com.example.produra.infrastructure.dao.UnitDao
 import com.example.produra.infrastructure.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -23,5 +24,16 @@ object BindDao {
         ).build()
 
         return db.productDao()
+    }
+
+    @Singleton
+    @Provides
+    fun bindUnitDao(@ApplicationContext context: Context): UnitDao {
+        val db = Room.databaseBuilder(
+            context,
+            AppDatabase::class.java, "units"
+        ).build()
+
+        return db.unitDao()
     }
 }

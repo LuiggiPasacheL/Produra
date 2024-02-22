@@ -7,28 +7,37 @@ import com.example.produra.model.Product
 
 @Entity(tableName = "products")
 data class ProductEntity(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int?,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "productId") val productId: Int?,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "mustBePurchased") val mustBePurchased: Boolean,
+    @ColumnInfo(name = "amount") val amount: Double,
+    @ColumnInfo(name = "thresholdAmount") val thresholdAmount: Double?,
+    @ColumnInfo(name = "unitId") val unitId: Int
 ) {
     companion object {
         fun fromProduct(p: Product): ProductEntity {
             return ProductEntity(
-                id = p.id,
+                productId = p.productId,
                 description = p.description,
                 mustBePurchased = p.mustBePurchased,
-                name = p.name
+                name = p.name,
+                amount = p.amount,
+                thresholdAmount = p.thresholdAmount,
+                unitId = p.unitId
             )
         }
     }
 
     fun toProduct(): Product {
         return Product(
-            id = this.id,
+            productId = this.productId,
             mustBePurchased = this.mustBePurchased,
             description = this.description,
-            name = this.name
+            name = this.name,
+            amount = this.amount,
+            thresholdAmount = this.thresholdAmount,
+            unitId = this.unitId
         )
     }
 }

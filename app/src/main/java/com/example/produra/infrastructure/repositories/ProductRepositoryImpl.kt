@@ -10,7 +10,7 @@ class ProductRepositoryImpl @Inject constructor(
     private val productDao: ProductDao
 ) : ProductRepository {
     override suspend fun save(p: Product) {
-        if (p.id == null) {
+        if (p.productId == null) {
             val productEntity = ProductEntity.fromProduct(p)
             productDao.addProduct(productEntity)
             return
