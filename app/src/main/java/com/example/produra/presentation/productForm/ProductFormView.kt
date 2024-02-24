@@ -60,6 +60,7 @@ fun ProductFormView(
                         val product = state.product.copy(description = description)
                         viewModel.onValueChanged(product = product)
                     })
+                // TODO: Add comboBox to select Unit and attach to a product
                 Row(
                     modifier = Modifier
                         .height(48.dp)

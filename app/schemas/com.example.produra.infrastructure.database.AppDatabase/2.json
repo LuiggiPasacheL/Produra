@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "e082b24c9c85018c94cda52eb7b6e030",
+    "identityHash": "e8f291c0097bae221dfc1e67cdda5af0",
     "entities": [
       {
         "tableName": "products",
@@ -62,13 +62,13 @@
       },
       {
         "tableName": "units",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`unitId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `measure` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`unitId` INTEGER PRIMARY KEY AUTOINCREMENT, `measure` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "unitId",
             "columnName": "unitId",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "measure",
@@ -90,7 +90,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e082b24c9c85018c94cda52eb7b6e030')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e8f291c0097bae221dfc1e67cdda5af0')"
     ]
   }
 }

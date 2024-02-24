@@ -8,6 +8,10 @@ class AddOrUpdateProductUseCase @Inject constructor(
     private val productRepository: ProductRepository
 ) {
     suspend operator fun invoke(p: Product) {
-        return productRepository.save(p)
+        if (p.unit != null) {
+            return productRepository.save(p, p.unit.unitId!!)
+        } else {
+            throw Error("El producto no tiene una unidad válida")
+        }
     }
 }

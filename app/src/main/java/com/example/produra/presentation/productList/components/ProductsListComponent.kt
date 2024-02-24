@@ -30,9 +30,28 @@ fun ProductListComponent(
 @Composable
 fun ProductListComponentPreview() {
     val products = listOf(
-        Product(1, "Plátano", "Color amarillo", true),
-        Product(2, "Banana", "Tulepera con la banana", false),
-        Product(3, "Manzana", "Manzana", true)
+        Product.createEmpty().copy(
+            productId = 1,
+            name = "Plátano",
+            description = "Color amarillo",
+            mustBePurchased = true
+        ),
+        Product.createEmpty().copy(
+            productId = 2,
+            name = "Banana",
+            description = "Tulepera con la banana",
+            mustBePurchased = false,
+            amount = 0.0,
+            thresholdAmount = null,
+            unit = null
+        ),
+        Product.createEmpty().copy(
+            productId = 3,
+            name = "Manzana",
+            description = "Manzana",
+            mustBePurchased = true, amount = 0.0, thresholdAmount = null,
+            unit = null
+        ),
     )
 
     ProductListComponent(

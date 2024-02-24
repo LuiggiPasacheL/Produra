@@ -9,13 +9,13 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(
     private val productDao: ProductDao
 ) : ProductRepository {
-    override suspend fun save(p: Product) {
+    override suspend fun save(p: Product, unitId: Int) {
         if (p.productId == null) {
-            val productEntity = ProductEntity.fromProduct(p)
+            val productEntity = ProductEntity.fromProduct(p, 1)
             productDao.addProduct(productEntity)
             return
         }
-        val productEntity = ProductEntity.fromProduct(p)
+        val productEntity = ProductEntity.fromProduct(p, 1)
         productDao.updateProduct(productEntity)
     }
 
@@ -33,5 +33,9 @@ class ProductRepositoryImpl @Inject constructor(
 
     override suspend fun getCart(): List<Product> {
         return productDao.getMustBePurchasedProducts().map { productEntity -> productEntity.toProduct() }
+    }
+
+    override suspend fun getProductWithUnit(id: Int): Product? {
+        return productDao.getProductsWithUnit(id)?.toProduct()
     }
 }

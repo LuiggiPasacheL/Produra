@@ -93,7 +93,7 @@ fun ProductDetails(product: Product, onNavigateToProduct: (id: Int) -> Unit) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = product.description, color = Color.White)
-        Button(onClick = { onNavigateToProduct(product.id!!) }) {
+        Button(onClick = { onNavigateToProduct(product.productId!!) }) {
             Text(text = "Ver más")
         }
     }
@@ -102,8 +102,8 @@ fun ProductDetails(product: Product, onNavigateToProduct: (id: Int) -> Unit) {
 @Preview
 @Composable
 fun ProductCardPreview() {
-    val p = Product(
-        1, "Plátano", "Color amarillo", true
+    val p = Product.createEmpty().copy(
+        productId = 1, name = "Plátano", description = "Color amarillo", mustBePurchased = true,
     )
 
     ProductCard(

@@ -16,7 +16,7 @@ data class ProductEntity(
     @ColumnInfo(name = "unitId") val unitId: Int
 ) {
     companion object {
-        fun fromProduct(p: Product): ProductEntity {
+        fun fromProduct(p: Product, unitId: Int): ProductEntity {
             return ProductEntity(
                 productId = p.productId,
                 description = p.description,
@@ -24,7 +24,7 @@ data class ProductEntity(
                 name = p.name,
                 amount = p.amount,
                 thresholdAmount = p.thresholdAmount,
-                unitId = p.unitId
+                unitId = unitId
             )
         }
     }
@@ -37,7 +37,7 @@ data class ProductEntity(
             name = this.name,
             amount = this.amount,
             thresholdAmount = this.thresholdAmount,
-            unitId = this.unitId
+            unit = null
         )
     }
 }

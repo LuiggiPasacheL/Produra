@@ -7,7 +7,7 @@ import com.example.produra.model.PUnit
 
 @Entity(tableName = "units")
 data class UnitEntity (
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name="unitId")val unitId: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name="unitId")val unitId: Int?,
     @ColumnInfo(name="measure") val measure: String,
 ) {
 
