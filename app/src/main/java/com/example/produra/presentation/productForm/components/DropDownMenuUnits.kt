@@ -17,12 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.produra.model.PUnit
 
 @Composable
-fun DropdownUnits(label: String, onValueChange: (String) -> Unit, elements: List<String>) {
+fun DropdownUnits(label: String, onValueChange: (PUnit) -> Unit, elements: List<PUnit>) {
 
     var selectedItem by remember {
-        mutableStateOf("")
+        mutableStateOf(PUnit.createEmpty())
     }
 
     var isExpanded by remember {
@@ -34,7 +35,7 @@ fun DropdownUnits(label: String, onValueChange: (String) -> Unit, elements: List
             .fillMaxWidth()
     ) {
         TextField(
-            value = if (selectedItem == "") label else selectedItem,
+            value = if (selectedItem.measure == "") label else selectedItem.measure,
             onValueChange = {},
             enabled = false,
             modifier = Modifier
@@ -44,13 +45,12 @@ fun DropdownUnits(label: String, onValueChange: (String) -> Unit, elements: List
         )
         DropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
             elements.forEach { e ->
-                DropdownMenuItem(text = { Text(e) }, onClick = {
+                DropdownMenuItem(text = { Text(e.measure) }, onClick = {
                     onValueChange(e)
                     selectedItem = e
                     isExpanded = false
                 })
             }
-            DropdownMenuItem(text = { Text("Ninguno") }, onClick = { isExpanded = false })
         }
     }
 }
@@ -59,8 +59,9 @@ fun DropdownUnits(label: String, onValueChange: (String) -> Unit, elements: List
 @Composable
 fun PreviewDropdownUnits(){
     val elements = listOf(
-        "elemento 1",
-        "elemento 2"
+        PUnit(1,"Kg"),
+        PUnit(2, "G"),
+        PUnit(3, "unidades")
     )
-    DropdownUnits(label = elements.first(), onValueChange = {}, elements = elements)
+    DropdownUnits(label = elements.first().measure, onValueChange = {}, elements = elements)
 }

@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.produra.model.PUnit
+import com.example.produra.presentation.productForm.components.DropdownUnits
 
 @Composable
 fun ProductFormView(
@@ -61,6 +63,27 @@ fun ProductFormView(
                         viewModel.onValueChanged(product = product)
                     })
                 // TODO: Add comboBox to select Unit and attach to a product
+                Row {
+                    TextField(
+                        modifier = Modifier.padding(7.dp),
+                        value = state.product.amount.toString(),
+                        label = { Text("Cantidad Actual") },
+                        onValueChange = { quantity ->
+                            val amount: Double? = quantity.toDoubleOrNull()
+                            if (amount != null) {
+                                val product = state.product.copy(amount = amount)
+                                viewModel.onValueChanged(product = product)
+                            }
+                        })
+                    DropdownUnits(
+                        label = "Medida",
+                        onValueChange = {unit ->
+                            val product = state.product.copy(unit = unit)
+                            viewModel.onValueChanged(product = product)
+                        },
+                        elements = state.units)
+                }
+                // Before of this
                 Row(
                     modifier = Modifier
                         .height(48.dp)
