@@ -30,19 +30,10 @@ interface ProductDao {
     suspend fun getMustBePurchasedProducts(): List<ProductEntity>
 
     @Transaction
-    @Query(
-        """
-        SELECT * FROM products
-    """
-    )
+    @Query("SELECT * FROM products")
     suspend fun getProductsWithUnit(): List<ProductWithUnit>
 
     @Transaction
-    @Query(
-        """
-        SELECT * FROM products
-        WHERE productId = :productId
-    """
-    )
+    @Query("SELECT * FROM products WHERE productId = :productId")
     suspend fun getProductsWithUnit(productId: Int): ProductWithUnit?
 }
