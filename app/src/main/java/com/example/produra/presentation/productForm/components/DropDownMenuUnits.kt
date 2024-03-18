@@ -20,7 +20,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.produra.model.PUnit
 
 @Composable
-fun DropdownUnits(label: String, onValueChange: (PUnit) -> Unit, elements: List<PUnit>) {
+fun DropdownUnits(
+    label: String,
+    onValueChange: (PUnit) -> Unit,
+    elements: List<PUnit>,
+    modifier: Modifier
+) {
 
     var selectedItem by remember {
         mutableStateOf(PUnit.createEmpty())
@@ -31,17 +36,23 @@ fun DropdownUnits(label: String, onValueChange: (PUnit) -> Unit, elements: List<
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
     ) {
         TextField(
-            value = if (selectedItem.measure == "") label else selectedItem.measure,
+            label = { Text(text = label) },
+            value = /* if (selectedItem.measure == "") label else */ selectedItem.measure,
             onValueChange = {},
             enabled = false,
             modifier = Modifier
                 .clickable { isExpanded = !isExpanded }
                 .fillMaxWidth(),
-            trailingIcon = { Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null) }
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.ArrowDropDown,
+                    contentDescription = null
+                )
+            }
         )
         DropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
             elements.forEach { e ->
@@ -57,11 +68,16 @@ fun DropdownUnits(label: String, onValueChange: (PUnit) -> Unit, elements: List<
 
 @Preview
 @Composable
-fun PreviewDropdownUnits(){
+fun PreviewDropdownUnits() {
     val elements = listOf(
-        PUnit(1,"Kg"),
+        PUnit(1, "Kg"),
         PUnit(2, "G"),
         PUnit(3, "unidades")
     )
-    DropdownUnits(label = elements.first().measure, onValueChange = {}, elements = elements)
+    DropdownUnits(
+        label = elements.first().measure,
+        onValueChange = {},
+        elements = elements,
+        modifier = Modifier
+    )
 }

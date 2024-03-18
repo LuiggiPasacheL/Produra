@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.produra.model.PUnit
 import com.example.produra.model.Product
 import com.example.produra.useCase.products.addOrUpdateProduct.AddOrUpdateProductUseCase
 import com.example.produra.useCase.products.getProduct.GetProductUseCase
@@ -41,16 +42,40 @@ class ProductFormViewModel @Inject constructor(
 
     fun actionForm() {
         viewModelScope.launch {
-            val product = state.product
+            if (state.name == "" || state.description == "" ||
+                state.quantity.toDoubleOrNull() == null || state.selectedUnit == null
+            ) {
+                // TODO: Launch toast and communicate error
+                println("ERROR AL AÑADIR PRODUCTO")
+                return@launch
+            }
+
+            val product = state.product.copy(
+                name = state.name,
+                description = state.description,
+                amount = state.quantity.toDouble(),
+                mustBePurchased = state.mustBePurchased,
+                unit = state.selectedUnit,
+                thresholdAmount = null
+            )
+
             addOrUpdateProductUseCase(product)
         }
     }
 
     fun onValueChanged(
-        product: Product
+        name: String? = null,
+        description: String? = null,
+        quantity: String? = null,
+        selectedUnit: PUnit? = null,
+        mustBePurchased: Boolean? = null
     ) {
         this.state = this.state.copy(
-            product = product
+            name = name ?: this.state.name,
+            description = description ?: this.state.description,
+            quantity = quantity ?: this.state.quantity,
+            selectedUnit = selectedUnit ?: this.state.selectedUnit,
+            mustBePurchased = mustBePurchased ?: this.state.mustBePurchased
         )
     }
 }
