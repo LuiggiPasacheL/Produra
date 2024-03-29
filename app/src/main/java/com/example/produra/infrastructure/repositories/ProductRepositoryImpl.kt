@@ -11,31 +11,31 @@ class ProductRepositoryImpl @Inject constructor(
 ) : ProductRepository {
     override suspend fun save(p: Product, unitId: Int) {
         if (p.productId == null) {
-            val productEntity = ProductEntity.fromProduct(p, 1)
+            val productEntity = ProductEntity.fromProduct(p, unitId)
             productDao.addProduct(productEntity)
             return
         }
-        val productEntity = ProductEntity.fromProduct(p, 1)
+        val productEntity = ProductEntity.fromProduct(p, unitId)
         productDao.updateProduct(productEntity)
     }
 
     override suspend fun getById(id: Int): Product? {
-        return productDao.getProductById(id)?.toProduct()
+        return productDao.getProductWithUnit(id)?.toProduct()
     }
 
     override suspend fun getByName(name: String): Product? {
-        return productDao.getProductByName(name)?.toProduct()
+        return productDao.getProductWithUnitByName(name)?.toProduct()
     }
 
     override suspend fun getAll(): List<Product> {
-        return productDao.getProducts().map { productEntity -> productEntity.toProduct() }
+        return productDao.getProductsWithUnit().map { productEntity -> productEntity.toProduct() }
     }
 
     override suspend fun getCart(): List<Product> {
-        return productDao.getMustBePurchasedProducts().map { productEntity -> productEntity.toProduct() }
+        return productDao.getProductsWithUnitMustBePurchased().map { productEntity -> productEntity.toProduct() }
     }
 
     override suspend fun getProductWithUnit(id: Int): Product? {
-        return productDao.getProductsWithUnit(id)?.toProduct()
+        return productDao.getProductWithUnit(id)?.toProduct()
     }
 }

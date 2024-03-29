@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.produra.model.PUnit
 import com.example.produra.model.Product
 
 @Composable
@@ -29,28 +30,27 @@ fun ProductListComponent(
 @Preview
 @Composable
 fun ProductListComponentPreview() {
+    val u = PUnit.createEmpty()
     val products = listOf(
-        Product.createEmpty().copy(
+        Product.createEmpty(u).copy(
             productId = 1,
             name = "Plátano",
             description = "Color amarillo",
             mustBePurchased = true
         ),
-        Product.createEmpty().copy(
+        Product.createEmpty(u).copy(
             productId = 2,
             name = "Banana",
             description = "Tulepera con la banana",
             mustBePurchased = false,
             amount = 0.0,
             thresholdAmount = null,
-            unit = null
         ),
-        Product.createEmpty().copy(
+        Product.createEmpty(u).copy(
             productId = 3,
             name = "Manzana",
             description = "Manzana",
             mustBePurchased = true, amount = 0.0, thresholdAmount = null,
-            unit = null
         ),
     )
 

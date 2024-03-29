@@ -32,11 +32,18 @@ class ProductFormViewModel @Inject constructor(
             if (productId != null) {
                 val product = getProductUseCase(productId)
                 product?.let { p ->
-                    state = state.copy(product = p)
+                    state = state.copy(
+                        name = product.name,
+                        description = product.description,
+                        quantity = product.amount.toString(),
+                        mustBePurchased = product.mustBePurchased,
+                        selectedUnit = product.unit,
+                    )
                 }
-                val units = listUnitsUseCase()
-                state = state.copy(units = units)
             }
+
+            val units = listUnitsUseCase()
+            state = state.copy(units = units)
         }
     }
 
@@ -50,12 +57,13 @@ class ProductFormViewModel @Inject constructor(
                 return@launch
             }
 
-            val product = state.product.copy(
+            val product = Product(
+                productId = null,
                 name = state.name,
                 description = state.description,
                 amount = state.quantity.toDouble(),
                 mustBePurchased = state.mustBePurchased,
-                unit = state.selectedUnit,
+                unit = state.selectedUnit!!,
                 thresholdAmount = null
             )
 

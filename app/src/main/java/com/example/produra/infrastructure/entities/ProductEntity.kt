@@ -28,16 +28,4 @@ data class ProductEntity(
             )
         }
     }
-
-    fun toProduct(): Product {
-        return Product(
-            productId = this.productId,
-            mustBePurchased = this.mustBePurchased,
-            description = this.description,
-            name = this.name,
-            amount = this.amount,
-            thresholdAmount = this.thresholdAmount,
-            unit = null
-        )
-    }
 }

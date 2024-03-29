@@ -4,8 +4,6 @@ import com.example.produra.model.PUnit
 import com.example.produra.model.Product
 
 data class ProductFormState(
-    val editable: Boolean = false,
-
     val name: String = "",
     val description: String = "",
     val quantity: String = "",
@@ -13,6 +11,4 @@ data class ProductFormState(
     val mustBePurchased: Boolean = false,
 
     val units: List<PUnit> = listOf(PUnit.createEmpty()),
-
-    val product: Product = Product.createEmpty(),
 )

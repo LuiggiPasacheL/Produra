@@ -17,23 +17,9 @@ import javax.inject.Singleton
 object BindDao {
     @Singleton
     @Provides
-    fun bindProductDao(@ApplicationContext context: Context): ProductDao {
-        val db = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, "products"
-        ).build()
-
-        return db.productDao()
-    }
+    fun bindProductDao(db: AppDatabase): ProductDao = db.productDao()
 
     @Singleton
     @Provides
-    fun bindUnitDao(@ApplicationContext context: Context): UnitDao {
-        val db = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, "units"
-        ).build()
-
-        return db.unitDao()
-    }
+    fun bindUnitDao(db: AppDatabase): UnitDao = db.unitDao()
 }

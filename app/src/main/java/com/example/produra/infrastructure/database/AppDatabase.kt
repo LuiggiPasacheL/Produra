@@ -7,9 +7,10 @@ import com.example.produra.infrastructure.dao.UnitDao
 import com.example.produra.infrastructure.entities.ProductEntity
 import com.example.produra.infrastructure.entities.UnitEntity
 
-@Database(entities = [ProductEntity::class, UnitEntity::class], version = 2, exportSchema = true)
+@Database(entities = [ProductEntity::class, UnitEntity::class], version = 3, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
 
     abstract fun unitDao(): UnitDao
+
 }

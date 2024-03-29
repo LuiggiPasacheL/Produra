@@ -8,7 +8,7 @@ class AddOrUpdateProductUseCase @Inject constructor(
     private val productRepository: ProductRepository
 ) {
     suspend operator fun invoke(p: Product) {
-        if (p.unit?.unitId != null) {
+        if (p.unit.unitId != null) {
             // TODO: Null pointer exception
             // TODO: EDIT UNIT ON SAVE
             return productRepository.save(p, p.unit.unitId)

@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.produra.model.PUnit
 import com.example.produra.model.Product
 
 @Composable
@@ -102,7 +103,10 @@ fun ProductDetails(product: Product, onNavigateToProduct: (id: Int) -> Unit) {
 @Preview
 @Composable
 fun ProductCardPreview() {
-    val p = Product.createEmpty().copy(
+
+    val u = PUnit.createEmpty()
+
+    val p = Product.createEmpty(u).copy(
         productId = 1, name = "Plátano", description = "Color amarillo", mustBePurchased = true,
     )
 

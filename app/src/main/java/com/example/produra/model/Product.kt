@@ -7,11 +7,11 @@ data class Product(
     val mustBePurchased: Boolean,
     val amount: Double,
     val thresholdAmount: Double?,
-    val unit: PUnit?
+    val unit: PUnit
 ) {
 
     companion object {
-        fun createEmpty(): Product {
+        fun createEmpty(unit: PUnit): Product {
             return Product(
                 productId = null,
                 name = "",
@@ -19,7 +19,7 @@ data class Product(
                 mustBePurchased = false,
                 amount = 0.0,
                 thresholdAmount = null,
-                unit = null
+                unit = unit
             )
         }
     }
