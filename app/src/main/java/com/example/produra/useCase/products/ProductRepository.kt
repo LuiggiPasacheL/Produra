@@ -1,6 +1,5 @@
 package com.example.produra.useCase.products
 
-import com.example.produra.model.PUnit
 import com.example.produra.model.Product
 
 interface ProductRepository {
