@@ -1,5 +1,6 @@
 package com.example.produra.presentation.productForm
 
+import android.net.Ikev2VpnProfile
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,9 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import com.example.produra.model.PUnit
 import com.example.produra.presentation.productForm.components.DropdownUnits
 
 @Composable
@@ -31,6 +35,21 @@ fun ProductFormView(
 ) {
     val state = viewModel.state
 
+    ProductForm(
+        state = state,
+        onValueChanged = viewModel::onValueChanged,
+        actionForm = viewModel::actionForm,
+        onNavigateToListProducts = onNavigateToListProducts
+    )
+
+}
+
+@Composable
+fun ProductForm(
+    state: ProductFormState, onValueChanged: (
+        name: String?, description: String?, quantity: String?, selectedUnit: PUnit?, mustBePurchased: Boolean?
+    ) -> Unit, actionForm: () -> Unit, onNavigateToListProducts: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -54,7 +73,7 @@ fun ProductFormView(
                     value = state.name,
                     label = { Text("Nombre") },
                     onValueChange = { name ->
-                        viewModel.onValueChanged(name = name)
+                        onValueChanged(name, null, null, null, null)
                     })
                 TextField(modifier = Modifier
                     .padding(7.dp)
@@ -62,7 +81,7 @@ fun ProductFormView(
                     value = state.description,
                     label = { Text("Descripción") },
                     onValueChange = { description ->
-                        viewModel.onValueChanged(description = description)
+                        onValueChanged(null, description, null, null, null)
                     })
                 Row {
                     TextField(
@@ -72,7 +91,7 @@ fun ProductFormView(
                         value = state.quantity,
                         label = { Text("Cantidad Actual") },
                         onValueChange = { quantity ->
-                            viewModel.onValueChanged(quantity = quantity)
+                            onValueChanged(null, null, quantity, null, null)
                         },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
                     )
@@ -80,7 +99,7 @@ fun ProductFormView(
                         label = "Unidad",
                         modifier = Modifier.padding(7.dp),
                         onValueChange = { unit ->
-                            viewModel.onValueChanged(selectedUnit = unit)
+                            onValueChanged(null, null, null, unit, null)
                         },
                         elements = state.units
                     )
@@ -93,13 +112,13 @@ fun ProductFormView(
                         .fillMaxWidth()
                         .clickable {
                             val mustBePurchased = state.mustBePurchased
-                            viewModel.onValueChanged(mustBePurchased = !mustBePurchased)
+                            onValueChanged(null, null, null, null, !mustBePurchased)
                         }, verticalAlignment = Alignment.CenterVertically
                 ) {
                     Checkbox(
                         checked = state.mustBePurchased,
                         onCheckedChange = { mustBePurchased ->
-                            viewModel.onValueChanged(mustBePurchased = mustBePurchased)
+                            onValueChanged(null, null, null, null, mustBePurchased)
                         },
                         enabled = true,
                     )
@@ -117,7 +136,7 @@ fun ProductFormView(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(onClick = {
-                viewModel.actionForm()
+                actionForm()
                 onNavigateToListProducts()
             }) {
                 Text(text = "Agregar producto")
@@ -129,4 +148,19 @@ fun ProductFormView(
             }
         }
     }
+
+}
+
+@Composable
+@Preview(showBackground = true, name = "Light Mode")
+fun ProductFormPreview() {
+    val state = ProductFormState()
+
+    val onValueChanged: (
+        name: String?, description: String?, quantity: String?, selectedUnit: PUnit?, mustBePurchased: Boolean?
+    ) -> Unit = { _, _, _, _, _ -> }
+    val actionForm: () -> Unit = {}
+    val onNavigateToListProducts: () -> Unit = {}
+
+    ProductForm(state, onValueChanged, actionForm, onNavigateToListProducts)
 }
