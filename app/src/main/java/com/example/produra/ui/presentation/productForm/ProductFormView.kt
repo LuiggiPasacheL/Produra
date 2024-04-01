@@ -1,5 +1,6 @@
 package com.example.produra.ui.presentation.productForm
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -150,7 +151,9 @@ fun ProductForm(
 }
 
 @Composable
-@Preview(showBackground = true, name = "Light Mode")
+@Preview(name = "Light Mode", showBackground = true)
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED, showBackground = true)
+@Preview(name = "Full Preview", showSystemUi = true, showBackground = true)
 fun ProductFormPreview() {
     val state = ProductFormState()
 

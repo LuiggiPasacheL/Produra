@@ -1,5 +1,6 @@
 package com.example.produra.ui.presentation.productList
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.absoluteOffset
@@ -18,8 +19,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.produra.model.PUnit
+import com.example.produra.model.Product
 import com.example.produra.ui.presentation.productList.components.ProductListComponent
 
 @Composable
@@ -35,6 +39,24 @@ fun ProductListView(
         viewModel.loadProducts()
         viewModel.toggleProductChanged()
     }
+
+    ProductList(
+        state = state,
+        onNavigateToCart = onNavigateToCart,
+        toggleProductMustBePurchased = viewModel::toggleProductMustBePurchased,
+        onNavigateToProduct = onNavigateToProduct,
+        onNavigateToAddProduct = onNavigateToAddProduct
+    )
+}
+
+@Composable
+fun ProductList(
+    state: ProductListState,
+    onNavigateToCart: () -> Unit,
+    toggleProductMustBePurchased: (product: Product) -> Unit,
+    onNavigateToProduct: (id: Int) -> Unit,
+    onNavigateToAddProduct: () -> Unit
+) {
 
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -58,7 +80,7 @@ fun ProductListView(
         ProductListComponent(
             products = state.products,
             toggleProductMustBePurchased = { product ->
-                viewModel.toggleProductMustBePurchased(
+                toggleProductMustBePurchased(
                     product
                 )
             },
@@ -74,4 +96,34 @@ fun ProductListView(
     ) {
         Icon(imageVector = Icons.Default.Add, contentDescription = "Navigate to add product")
     }
+}
+
+@Composable
+@Preview(name = "Light Mode", showBackground = true)
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED, showBackground = true)
+@Preview(name = "Full Preview", showSystemUi = true, showBackground = true)
+fun ProductListPreview() {
+
+    val productEmpty = Product.createEmpty(PUnit.createEmpty())
+
+    val products = listOf(
+        productEmpty.copy(name = "Product 1"),
+        productEmpty.copy(name = "Product 2"),
+        productEmpty.copy(name = "Product 3"),
+        productEmpty.copy(name = "Product etc"),
+    )
+
+    val state = ProductListState(products = products)
+    val onNavigateToCart = {}
+    val toggleProductMustBePurchased: (product: Product) -> Unit = {}
+    val onNavigateToProduct: (id: Int) -> Unit = {}
+    val onNavigateToAddProduct = {}
+
+    ProductList(
+        state = state,
+        onNavigateToCart = onNavigateToCart,
+        toggleProductMustBePurchased = toggleProductMustBePurchased,
+        onNavigateToProduct = onNavigateToProduct,
+        onNavigateToAddProduct = onNavigateToAddProduct
+    )
 }
