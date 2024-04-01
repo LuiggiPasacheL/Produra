@@ -20,11 +20,13 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.produra.R
 import com.example.produra.model.PUnit
 import com.example.produra.ui.presentation.productForm.components.DropdownUnits
 
@@ -61,7 +63,7 @@ fun ProductForm(
         ) {
             Text(
                 modifier = Modifier.padding(15.dp),
-                text = "Añadir Producto",
+                text = stringResource(id = R.string.add_product),
                 style = MaterialTheme.typography.titleLarge,
                 fontSize = 30.sp
             )
@@ -70,7 +72,7 @@ fun ProductForm(
                     .padding(7.dp)
                     .fillMaxWidth(),
                     value = state.name,
-                    label = { Text("Nombre") },
+                    label = { Text(stringResource(id = R.string.name)) },
                     onValueChange = { name ->
                         onValueChanged(name, null, null, null, null)
                     })
@@ -78,7 +80,7 @@ fun ProductForm(
                     .padding(7.dp)
                     .fillMaxWidth(),
                     value = state.description,
-                    label = { Text("Descripción") },
+                    label = { Text(stringResource(id = R.string.description)) },
                     onValueChange = { description ->
                         onValueChanged(null, description, null, null, null)
                     })
@@ -88,14 +90,14 @@ fun ProductForm(
                             .padding(7.dp)
                             .width(200.dp),
                         value = state.quantity,
-                        label = { Text("Cantidad Actual") },
+                        label = { Text(stringResource(id = R.string.name)) },
                         onValueChange = { quantity ->
                             onValueChanged(null, null, quantity, null, null)
                         },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
                     )
                     DropdownUnits(
-                        label = "Unidad",
+                        label = stringResource(id = R.string.unit),
                         modifier = Modifier.padding(7.dp),
                         onValueChange = { unit ->
                             onValueChanged(null, null, null, unit, null)
@@ -122,7 +124,7 @@ fun ProductForm(
                         enabled = true,
                     )
                     Spacer(Modifier.width(32.dp))
-                    Text("¿Debe ser comprado?")
+                    Text(stringResource(id = R.string.must_pursh))
                 }
             }
         }
@@ -138,12 +140,12 @@ fun ProductForm(
                 actionForm()
                 onNavigateToListProducts()
             }) {
-                Text(text = "Agregar producto")
+                Text(text = stringResource(id = R.string.next))
             }
             Button(onClick = {
                 onNavigateToListProducts()
             }) {
-                Text(text = "Retroceder")
+                Text(text = stringResource(id = R.string.back))
             }
         }
     }

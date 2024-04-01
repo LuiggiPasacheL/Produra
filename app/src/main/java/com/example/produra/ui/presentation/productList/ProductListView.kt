@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.produra.R
 import com.example.produra.model.PUnit
 import com.example.produra.model.Product
 import com.example.produra.ui.presentation.productList.components.ProductListComponent
@@ -61,7 +63,7 @@ fun ProductList(
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "Productos",
+                text = stringResource(id = R.string.product_title),
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .fillMaxWidth(0.75f)

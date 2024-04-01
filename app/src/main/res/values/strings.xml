@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Produra</string>
+
+    <string name="add_product">Añadir Producto</string>
+    <string name="name">Nombre</string>
+    <string name="description">Descripción</string>
+    <string name="curr_quantity">Cantidad Actual</string>
+    <string name="unit">unit</string>
+    <string name="must_pursh">¿Debe ser comprado?</string>
+    <string name="back">Retroceder</string>
+    <string name="next">Continuar</string>
+    <string name="cart_title">Carrito de compras</string>
+    <string name="product_title">Productos</string>
 </resources>
