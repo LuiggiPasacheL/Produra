@@ -1,4 +1,4 @@
-package com.example.produra.presentation.cart
+package com.example.produra.ui.presentation.cart
 
 import com.example.produra.model.Product
 

@@ -1,4 +1,4 @@
-package com.example.produra.presentation.productList.components
+package com.example.produra.ui.presentation.productList.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn

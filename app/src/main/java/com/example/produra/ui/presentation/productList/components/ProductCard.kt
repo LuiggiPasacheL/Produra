@@ -1,4 +1,4 @@
-package com.example.produra.presentation.productList.components
+package com.example.produra.ui.presentation.productList.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

@@ -1,4 +1,4 @@
-package com.example.produra.presentation.productList
+package com.example.produra.ui.presentation.cart
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,32 +7,32 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.produra.model.Product
 import com.example.produra.useCase.products.addOrUpdateProduct.AddOrUpdateProductUseCase
-import com.example.produra.useCase.products.listProducts.ListProductsUseCase
+import com.example.produra.useCase.products.listProducts.CartProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductListViewModel @Inject constructor(
-    val listProductsUseCase: ListProductsUseCase,
+class CartViewModel @Inject constructor(
+    val cartProductsUseCase: CartProductsUseCase,
     val updateProductUseCase: AddOrUpdateProductUseCase
-) : ViewModel() {
-    var state by mutableStateOf(ProductListState())
+): ViewModel() {
+    var state by mutableStateOf(CartState())
         private set
 
     init {
-        loadProducts()
+        onLoadAction()
     }
 
-    fun loadProducts() {
+    fun onLoadAction() {
         viewModelScope.launch {
-            val products = listProductsUseCase()
+            val products = cartProductsUseCase()
             state = state.copy(products = products)
         }
     }
 
-    fun toggleProductChanged() {
-        state = state.copy(productChanged = !state.productChanged)
+    fun reloadPage() {
+        state = state.copy(takeOutCart = !state.takeOutCart)
     }
 
     fun toggleProductMustBePurchased(p: Product) {

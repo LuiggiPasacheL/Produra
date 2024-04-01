@@ -1,6 +1,5 @@
-package com.example.produra.presentation.productForm
+package com.example.produra.ui.presentation.productForm
 
-import android.net.Ikev2VpnProfile
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,9 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
 import com.example.produra.model.PUnit
-import com.example.produra.presentation.productForm.components.DropdownUnits
+import com.example.produra.ui.presentation.productForm.components.DropdownUnits
 
 @Composable
 fun ProductFormView(

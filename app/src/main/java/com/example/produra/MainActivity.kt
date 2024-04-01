@@ -13,9 +13,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.produra.presentation.cart.CartView
-import com.example.produra.presentation.productForm.ProductFormView
-import com.example.produra.presentation.productList.ProductListView
+import com.example.produra.ui.presentation.cart.CartView
+import com.example.produra.ui.presentation.productForm.ProductFormView
+import com.example.produra.ui.presentation.productList.ProductListView
 import com.example.produra.ui.theme.ProduraTheme
 import com.example.produra.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint

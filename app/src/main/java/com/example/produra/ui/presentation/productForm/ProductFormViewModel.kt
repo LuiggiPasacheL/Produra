@@ -1,4 +1,4 @@
-package com.example.produra.presentation.productForm
+package com.example.produra.ui.presentation.productForm
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

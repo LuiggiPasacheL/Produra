@@ -1,4 +1,4 @@
-package com.example.produra.presentation.productList
+package com.example.produra.ui.presentation.productList
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.produra.presentation.productList.components.ProductListComponent
+import com.example.produra.ui.presentation.productList.components.ProductListComponent
 
 @Composable
 fun ProductListView(
